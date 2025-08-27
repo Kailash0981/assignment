@@ -1,0 +1,62 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include<stack>
+#include <cmath>
+
+using namespace std;
+void movedisk(char from,char to,stack<int>&src,stack<int>&des){
+    if(src.empty() && des.empty())
+    return;
+       if(src.empty()){
+           int disk=des.top();
+           des.pop();
+           src.push(disk);
+           cout<<"move disk "<<disk<<"from"<<to<<"to"<<from<<endl;
+       }else if(des.empty()){
+           int disk=src.top();
+           src.pop();
+           des.push(disk);
+           cout<<"move disk "<<disk<<"from"<<from<<"to"<<to<<endl;
+       }
+       else if(src.top()>des.top()){
+           int disk=des.top();
+           des.pop();
+           src.push(disk);
+           cout<<"move disk "<<disk<<"from"<<from<<"to"<<to<<endl;
+       }else{
+           int disk=src.top();
+           src.pop();
+           des.push(disk);
+           cout<<"move disk "<<disk<<"from"<<from<<"to"<<to<<endl;
+       }
+       
+       
+       
+       
+       
+       
+}
+int main() {
+int n;
+cout<<"enter no of disk";
+cin>> n;
+stack<int>src,aux,des;
+int totalmoves=pow(2,n)-1;
+for(int i=n;i>=1;i--){
+    src.push(i);
+}
+char s='A',a='b',d='c';
+if(n%2==0){
+    swap(a,d);
+}
+for(int i=1;i<=totalmoves;i++){
+    if(i%3==1){
+        movedisk(s,d,src,des);
+    }else if(i%3==2){
+        movedisk(s,a,src,aux);
+    }else {
+        movedisk(a,d,aux,des);
+    }
+}
+    return 0;
+}
